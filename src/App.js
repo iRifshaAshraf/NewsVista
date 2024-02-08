@@ -1,39 +1,43 @@
 import './App.css';
 import NavBar from './components/NavBar'
 import News from './components/News'
+import React, { useState } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Footer from './components/Footer'
 
-import React, { Component } from 'react'
-import {
-  BrowserRouter,
-  // BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import LoadingBar from 'react-top-loading-bar'
 
-export class App extends Component {
-  pageSize = 6;
-  render() {
+const App = () => {
+  const pageSize = 6;
+  const apiKey = process.env.REACT_APP_NEWS_API;
+
+  const [progress, setProgress] = useState(0)
+
     return (
       <div>
         <BrowserRouter>
         <NavBar/>
-        <Routes>
-        <Route path="/" element={<News pageSize={this.pageSize} key="general" country="us" category="general"/>}/>
-          <Route exact path="/business" element={<News pageSize={this.pageSize} key="business" country="us" category="business"/>} />
-          <Route exact path="/entertainment" element={<News pageSize={this.pageSize} key="entertainment" country="us" category="entertainment"/>} />
-          <Route exact path="/general" element={<News pageSize={this.pageSize} key="general" country="us" category="general"/>} />
-          <Route exact path="/health" element={<News pageSize={this.pageSize} key="health" country="us" category="health"/>} />
-          <Route exact path="/science" element={<News pageSize={this.pageSize} key="science" country="us" category="science"/>} />
-          <Route exact path="/sports" element={<News pageSize={this.pageSize} key="sports" country="us" category="sports"/>} />
-          <Route exact path="/technology" element={<News pageSize={this.pageSize} key="technology" country="us" category="technology"/>} />          
+        <LoadingBar height={5} color='#f11946' progress={progress} />
+        
+        <Routes basename='/NewsVista'>
+          <Route index element={<News setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} key="general" country="us" category="general" />} />
+          <Route path="/" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} key="general" country="us" category="general"/>}/>
+          <Route exact path="/business" element={<News  apiKey={apiKey}setProgress={setProgress} pageSize={pageSize} key="business" country="us" category="business"/>} />
+          <Route exact path="/entertainment" element={<News  apiKey={apiKey}setProgress={setProgress} pageSize={pageSize} key="entertainment" country="us" category="entertainment"/>} />
+          <Route exact path="/general" element={<News  apiKey={apiKey}setProgress={setProgress} pageSize={pageSize} key="general" country="us" category="general"/>} />
+          <Route exact path="/health" element={<News  apiKey={apiKey}setProgress={setProgress} pageSize={pageSize} key="health" country="us" category="health"/>} />
+          <Route exact path="/science" element={<News  apiKey={apiKey}setProgress={setProgress} pageSize={pageSize} key="science" country="us" category="science"/>} />
+          <Route exact path="/sports" element={<News  apiKey={apiKey}setProgress={setProgress} pageSize={pageSize} key="sports" country="us" category="sports"/>} />
+          <Route exact path="/technology" element={<News  apiKey={apiKey}setProgress={setProgress} pageSize={pageSize} key="technology" country="us" category="technology"/>} />          
         </Routes>
-        {/* <Footer mode={mode}/> */}
+
+        <Footer className="footer navbar-fixed-bottom"/>
       </BrowserRouter>
         
         
       </div>
     )
-  }
+
 }
 
 export default App;
