@@ -1,7 +1,0 @@
-<Route path="Business"/><News pageSize={6} category="sports"/>
-<Route path="Entertainment"/><News pageSize={6} category="sports"/>
-<Route path="General"/><News pageSize={6} category="sports"/>
-<Route path="Health"/><News pageSize={6} category="sports"/>
-<Route path="Science"/><News pageSize={6} category="sports"/>
-<Route path="Sports"/><News pageSize={6} category="sports"/>
-<Route path="Technology"/><News pageSize={6} category="sports"/>
